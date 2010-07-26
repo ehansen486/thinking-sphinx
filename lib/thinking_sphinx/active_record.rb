@@ -41,7 +41,7 @@ module ThinkingSphinx
           end
           
           def to_crc32s
-            (descendants << self).collect { |klass| klass.to_crc32 }
+            (subclasses << self).collect { |klass| klass.to_crc32 }
           end
           
           def sphinx_database_adapter
@@ -183,7 +183,7 @@ module ThinkingSphinx
       
       def insert_sphinx_index(index)
         self.sphinx_indexes << index
-        descendants.each { |klass| klass.insert_sphinx_index(index) }
+        subclasses.each { |klass| klass.insert_sphinx_index(index) }
       end
       
       def has_sphinx_indexes?
